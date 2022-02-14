@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2021.4">
+  <Nodes>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="114" y="138" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="5" />
+          <Fields>
+            <Field name="URL" />
+          </Fields>
+          <Data>
+            <r>
+              <c>https://www.vivino.com/api/explore/explore?country_code=KZ&amp;currency_code=USD&amp;grape_filter=varietal&amp;min_rating=1&amp;order_by=&amp;order=&amp;price_range_max=40&amp;price_range_min=10&amp;wine_type_ids[]=1&amp;wine_type_ids[]=2&amp;wine_type_ids[]=3&amp;page=1&amp;language=en</c>
+            </r>
+            <r>
+              <c>https://www.vivino.com/api/explore/explore?country_code=KZ&amp;currency_code=USD&amp;grape_filter=varietal&amp;min_rating=1&amp;order_by=&amp;order=&amp;price_range_max=40&amp;price_range_min=10&amp;wine_type_ids[]=3&amp;page=1&amp;language=en</c>
+            </r>
+            <r>
+              <c>https://www.vivino.com/api/explore/explore?country_code=KZ&amp;currency_code=USD&amp;grape_filter=varietal&amp;min_rating=1&amp;order_by=&amp;order=&amp;price_range_max=40&amp;price_range_min=10&amp;wine_type_ids[]=3&amp;wine_type_ids[]=7&amp;page=1&amp;language=en</c>
+            </r>
+            <r>
+              <c>https://www.vivino.com/api/explore/explore?country_code=KZ&amp;currency_code=USD&amp;grape_filter=varietal&amp;min_rating=1&amp;order_by=&amp;order=&amp;price_range_max=40&amp;price_range_min=10&amp;wine_type_ids[]=7&amp;wine_type_ids[]=4&amp;page=1&amp;language=en</c>
+            </r>
+            <r>
+              <c />
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxConnectorGui.Download.Download">
+        <Position x="258" y="138" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Password />
+          <URLField>URL</URLField>
+          <OutputMode>String</OutputMode>
+          <CodePage>65001</CodePage>
+          <EncodeURLs value="True" />
+          <Headers>
+            <NameValues />
+            <Fields orderChanged="False">
+              <Field name="URL" selected="False" />
+              <Field name="*Unknown" selected="False" />
+            </Fields>
+          </Headers>
+          <Payload>
+            <HTTPAction>GET</HTTPAction>
+            <QueryStringBodyMode>Compose</QueryStringBodyMode>
+            <ComposeNameValues />
+            <ComposeFields orderChanged="False">
+              <Field name="URL" selected="False" />
+              <Field name="*Unknown" selected="False" />
+            </ComposeFields>
+          </Payload>
+          <UserName />
+          <numConnections>2</numConnections>
+          <Timeout>600</Timeout>
+          <EnableRPM value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxConnectorEngine.dll" EngineDllEntryPoint="AlteryxDownload" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="1290" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\AIGUL_~1\AppData\Local\Temp\Engine_9132_1cbe36c6007d45eba937c186aa960c13_\Engine_6868_9c376d0e2b814f9196094c6b1bb14ca0_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.JSONParse.JSONParse">
+        <Position x="354" y="138" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <JSON_Field>DownloadData</JSON_Field>
+          <IncludeInOutput value="False" />
+          <SingleField value="True" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJSONParse" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="450" y="138" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression><![CDATA[Contains([JSON_Name],"wine.name")
+OR
+Contains([JSON_Name],"price.amount")
+OR
+Contains([JSON_Name],"wine.id")
+OR
+Contains([JSON_Name],"wine.type_id")
+OR
+Contains([JSON_Name],"vintage.seo_name")
+OR
+Contains([JSON_Name],"wine.seo_name")
+OR
+Contains([JSON_Name],"statistics.ratings_average")
+OR
+Contains([JSON_Name],"wine.region.country.name")
+
+
+
+]]></Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Contains([JSON_Name],"wine.name")
+OR
+Contains([JSON_Name],"price.amount")
+OR
+Con...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="642" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>URL</UpdateField_Name>
+          <CreateField_Name>RecordID</CreateField_Name>
+          <CreateField_Type>Int32</CreateField_Type>
+          <CreateField_Size>4</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression>if contains([Row-1:JSON_Name], 'price.amount')
+then [Row-1:RecordID] + 1 
+else [Row-1:RecordID] endif</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>if contains([Row-1:JSON_Name], 'price.amount')
+then [Row-1:Re...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="750" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>URL</UpdateField_Name>
+          <CreateField_Name>Type</CreateField_Name>
+          <CreateField_Type>String</CreateField_Type>
+          <CreateField_Size>15</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression><![CDATA[if contains([JSON_Name], 'price.amount')
+then 'price'
+elseif contains([JSON_Name], 'wine.name')
+then 'wine_name' 
+elseif contains([JSON_Name], 'wine.id')
+then 'wine_id' 
+elseif contains([JSON_Name], 'wine.type_id')
+then 'wine_typeid'
+elseif contains([JSON_Name], 'wine.seo_name')
+then 'wine_seo_name' 
+elseif contains([JSON_Name],'vintage.seo_name')
+then 'vintage_seoname' 
+elseif contains([JSON_Name],'statistics.ratings_average')
+then 'avg_rating' 
+elseif contains([JSON_Name],'wine.region')
+then 'region_name' 
+else 'other' endif
+]]></Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>if contains([JSON_Name], 'price.amount')
+then 'price'
+elseif ...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.CrossTab.CrossTab">
+        <Position x="966" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <GroupFields>
+            <Field field="RecordID" />
+          </GroupFields>
+          <HeaderField field="Type" />
+          <DataField field="JSON_ValueString" />
+          <Methods>
+            <Method method="First" />
+            <Separator>,</Separator>
+            <FieldSize value="2048" />
+          </Methods>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field description="Formula: if contains([Row-1:JSON_Name], 'price.amount')&#xA;then [Row-1:RecordID] + 1 &#xA;else [Row-1:RecordID] endif" name="RecordID" source="CrossTab:Group:First:" type="Int32" />
+            <Field name="avg_rating" size="1073741823" source="JSONParse: " type="V_WString" />
+            <Field name="price" size="1073741823" source="JSONParse: " type="V_WString" />
+            <Field name="region_name" size="1073741823" source="JSONParse: " type="V_WString" />
+            <Field name="vintage_seoname" size="1073741823" source="JSONParse: " type="V_WString" />
+            <Field name="wine_id" size="1073741823" source="JSONParse: " type="V_WString" />
+            <Field name="wine_name" size="1073741823" source="JSONParse: " type="V_WString" />
+            <Field name="wine_seo_name" size="1073741823" source="JSONParse: " type="V_WString" />
+            <Field name="wine_typeid" size="1073741823" source="JSONParse: " type="V_WString" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="RecordID" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxCrossTab" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1074" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="'https://www.vivino.com/'+[wine_seo_name]+'/w/'+[wine_id]" field="URL" size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[URL = 'https://www.vivino.com/'+[wine_seo_name]+'/w/'+[wine_id]
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="546" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1182" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF [wine_typeid] = '1' THEN 'red' &#xA;ELSEIF [wine_typeid] = '2'  THEN 'white' &#xA;ELSEIF [wine_typeid] = '3' THEN 'sparkling'&#xA;ELSEIF [wine_typeid] = '4' THEN 'rose'&#xA;ELSEIF [wine_typeid] = '7' THEN 'dessert'&#xA;ELSEIF [wine_typeid] = '24' THEN 'fortified'&#xA;ELSE 'other' ENDIF" field="wine_type" size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>wine_type = IF [wine_typeid] = '1' THEN 'red' 
+ELSEIF [wine_typeid] = '2'  THEN ...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="True" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="13" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Wine website data parsing</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="52cbd238-4019-45aa-9242-1ba03c930e85" />
+      <Telemetry>
+        <PreviousWorkflowId value="ff5c8e85-9f65-4dde-844d-67c5c4e39fc1" />
+        <OriginWorkflowId value="ae8a7376-d456-48ab-9b53-2060073e0ece" />
+      </Telemetry>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
